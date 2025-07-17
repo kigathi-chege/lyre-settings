@@ -1,0 +1,33 @@
+{
+  "name": "lyre/settings",
+  "description": "Provides a simple and intuitive way to manage settings on Laravel.",
+  "type": "library",
+  "license": "MIT",
+  "version": "0.0.1",
+  "autoload": {
+    "psr-4": {
+      "Lyre\\Settings\\": "src/"
+    }
+  },
+  "authors": [
+    {
+      "name": "kigathi-chege",
+      "email": "chegekigathi@gmail.com"
+    }
+  ],
+  "minimum-stability": "stable",
+  "require": {
+    "php": "^8.2",
+    "awcodes/filament-tiptap-editor": "^3.5",
+    "filament/filament": "^3.3",
+    "codeat3/blade-google-material-design-icons": "^1.20",
+    "lyre/lyre": "^1.1"
+  },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "Lyre\\Settings\\Providers\\LyreSettingsServiceProvider"
+      ]
+    }
+  }
+}
