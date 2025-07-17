@@ -36,7 +36,8 @@ class SettingResource extends Resource
                     Tables\Columns\TextColumn::make('value')
                         ->formatStateUsing(fn($state) => $state === null ? 'Empty' : $state)
                         ->searchable()
-                        ->color('primary'),
+                        ->color('primary')
+                        ->lineClamp(2),
                     Tables\Columns\TextColumn::make('description')
                         ->searchable()
                         ->formatStateUsing(fn(string $state): HtmlString => new HtmlString('<small>' . $state . '</small>')),
@@ -56,6 +57,10 @@ class SettingResource extends Resource
                                 Forms\Components\TextInput::make('value')
                                     ->label($record->label)
                                     ->type('number')
+                            ],
+                            'text' => [
+                                Forms\Components\MarkdownEditor::make('value')
+                                    ->label($record->label)
                             ],
                             default => [
                                 Forms\Components\TextInput::make('value')
