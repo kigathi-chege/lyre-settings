@@ -3,8 +3,11 @@
   "description": "Provides a simple and intuitive way to manage settings on Laravel.",
   "type": "library",
   "license": "MIT",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "autoload": {
+    "files": [
+      "src/helpers/helpers.php"
+    ],
     "psr-4": {
       "Lyre\\Settings\\": "src/"
     }
