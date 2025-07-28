@@ -69,6 +69,9 @@ class SettingResource extends Resource
                         };
                     }),
             ])
+            ->striped()
+            ->deferLoading()
+            ->defaultSort('created_at', 'desc')
             ->paginated(false);
     }
     public static function getPages(): array
