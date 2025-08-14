@@ -19,6 +19,12 @@ return new class extends Migration
             $table->json('attributes')->nullable();
             $table->string('type');
         });
+
+        if (!Schema::hasColumn('settings', 'status')) {
+            Schema::table('settings', function (Blueprint $table) {
+                $table->string('status')->default('editable')->after('type')->comment('Status of the setting, e.g., editable, locked (can view but cannot edit), hidden (internal use only)');
+            });
+        }
     }
 
     /**

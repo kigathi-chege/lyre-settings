@@ -9,6 +9,9 @@ class LyreSettingsServiceProvider extends ServiceProvider
 {
     public function register(): void
     {
+        $this->app->bind(\Lyre\Settings\Repositories\SettingRepository::class, config('lyre.settings.repository', \Lyre\Settings\Repositories\SettingRepository::class));
+        $this->app->bind(\Lyre\Settings\Contracts\SettingRepositoryInterface::class, config('lyre.settings.repository-interface', \Lyre\Settings\Contracts\SettingRepositoryInterface::class));
+
         register_repositories($this->app, 'Lyre\\Settings\\Repositories', 'Lyre\\Settings\\Contracts');
     }
 
