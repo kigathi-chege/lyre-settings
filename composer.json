@@ -3,7 +3,7 @@
   "description": "Provides a simple and intuitive way to manage settings on Laravel.",
   "type": "library",
   "license": "MIT",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "autoload": {
     "files": [
       "src/helpers/helpers.php"

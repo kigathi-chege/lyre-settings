@@ -11,17 +11,22 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('settings', function (Blueprint $table) {
-            basic_fields($table, 'settings');
-            $table->string('key')->unique()->index();
-            $table->string('label');
-            $table->text('value')->nullable();
-            $table->json('attributes')->nullable();
-            $table->string('type');
-        });
+        $prefix = config('lyre.table_prefix');
+        $tableName = $prefix . 'settings';
 
-        if (!Schema::hasColumn('settings', 'status')) {
-            Schema::table('settings', function (Blueprint $table) {
+        if (!Schema::hasTable($tableName)) {
+            Schema::create($tableName, function (Blueprint $table) use ($tableName, $prefix) {
+                basic_fields($table, 'settings');
+                $table->string('key')->unique()->index();
+                $table->string('label');
+                $table->text('value')->nullable();
+                $table->json('attributes')->nullable();
+                $table->string('type');
+            });
+        }
+
+        if (!Schema::hasColumn($tableName, 'status')) {
+            Schema::table($tableName, function (Blueprint $table) {
                 $table->string('status')->default('editable')->after('type')->comment('Status of the setting, e.g., editable, locked (can view but cannot edit), hidden (internal use only)');
             });
         }
