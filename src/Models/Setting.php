@@ -16,11 +16,20 @@ class Setting extends Model
 
     public static function get($key, $default = null)
     {
-        return self::where('key', $key)->first()->value ?? $default;
+        $tenantId = tenant()->id;
+        $defaultKey = $key;
+        $key = $tenantId ? "{$key}-{$tenantId}" : $key;
+        $value = self::where('key', $key)->first();
+        if (!$value && !$default && $defaultValue = self::where('key', $defaultKey)->first()) {
+            return $defaultValue->value;
+        }
+        return $value ? $value->value : $default;
     }
 
     public static function set($key, $value)
     {
+        $tenantId = tenant()->id;
+        $key = $tenantId ? "{$key}-{$tenantId}" : $key;
         self::updateOrCreate(['key' => $key], ['value' => $value]);
     }
 
