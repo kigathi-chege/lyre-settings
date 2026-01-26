@@ -16,7 +16,8 @@ class Setting extends Model
 
     public static function get($key, $default = null)
     {
-        $tenantId = tenant()->id;
+        $tenant = tenant();
+        $tenantId = $tenant?->id;
         $defaultKey = $key;
         $key = $tenantId ? "{$key}-{$tenantId}" : $key;
         $value = self::where('key', $key)->first();
@@ -28,7 +29,8 @@ class Setting extends Model
 
     public static function set($key, $value)
     {
-        $tenantId = tenant()->id;
+        $tenant = tenant();
+        $tenantId = $tenant?->id;
         $key = $tenantId ? "{$key}-{$tenantId}" : $key;
         self::updateOrCreate(['key' => $key], ['value' => $value]);
     }
