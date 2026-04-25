@@ -6,7 +6,7 @@ use Lyre\Settings\Filament\Resources\SettingResource\Pages;
 use Lyre\Settings\Models\Setting;
 use Filament\Facades\Filament;
 use Filament\Forms;
-use Filament\Forms\Form;
+use Filament\Schemas\Schema;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
@@ -17,11 +17,11 @@ class SettingResource extends Resource
 {
     protected static ?string $model = Setting::class;
 
-    protected static ?string $navigationIcon = 'gmdi-settings';
+    protected static \BackedEnum|string|null $navigationIcon = 'gmdi-settings';
 
     protected static bool $shouldRegisterNavigation = false;
 
-    public static function form(Form $form): Form
+    public static function form(Schema $form): Schema
     {
         return $form
             ->schema([
@@ -68,7 +68,7 @@ class SettingResource extends Resource
 
             ])
             ->actions([
-                Tables\Actions\EditAction::make()
+                \Filament\Actions\EditAction::make()
                     ->visible(function (Setting $record) {
                         // Super admin → always editable
                         if (auth()->user()->hasRole(config('lyre.super-admin'))) {
